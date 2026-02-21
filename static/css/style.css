@@ -45,7 +45,7 @@ a:hover {
     width: 90%;
     max-width: 1140px;
     margin: 0 auto;
-    padding: 2rem 0;
+    padding: 0;
 }
 
 .btn {
@@ -70,3 +70,138 @@ a:hover {
     opacity: 0.9;
     text-decoration: none;
 }
+
+/* --- Novos Estilos para Layout e Responsividade --- */
+
+/* Cabeçalho e Navegação */
+header {
+    background-color: var(--white);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    padding: 1rem 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--text-color);
+}
+
+/* Hero Section (Área Principal) */
+.hero {
+    padding: 4rem 0;
+    text-align: center;
+    min-height: 60vh; /* Garante altura mínima em telas grandes */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.hero p {
+    font-size: 1.125rem;
+    color: var(--secondary-color);
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+}
+
+/* Rodapé */
+footer {
+    background-color: var(--background-light);
+    padding: 2rem 0;
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--secondary-color);
+    margin-top: auto; /* Empurra o rodapé para baixo se o conteúdo for curto */
+}
+
+/* --- Media Queries (Responsividade) --- */
+
+/* Ajustes para Tablets e Celulares (telas menores que 768px) */
+@media (max-width: 768px) {
+    .hero {
+        padding: 3rem 0;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 1.75rem; /* Fonte menor no celular */
+    }
+
+    .hero p {
+        font-size: 1rem;
+        padding: 0 1rem; /* Margem lateral para o texto não colar na borda */
+    }
+    
+    /* Ajuste para tabela no mobile */
+    .table-responsive {
+        overflow-x: auto;
+    }
+}
+
+/* --- Estilos da Tabela de Tarefas --- */
+
+.table-responsive {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px; /* Garante que a tabela não esmague em telas muito pequenas */
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+th {
+    background-color: var(--background-light);
+    font-weight: 600;
+    color: var(--secondary-color);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Cabeçalho de Agrupamento (Nome do Projeto) */
+.group-header td {
+    background-color: #e9ecef;
+    color: var(--text-color);
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.text-muted {
+    color: var(--secondary-color);
+}
+
+/* Badges de Status */
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.status-no-prazo { background-color: #d1e7dd; color: #0f5132; }
+.status-atrasada { background-color: #f8d7da; color: #842029; }
+.status-concluida { background-color: #cfe2ff; color: #084298; }
+.status-cancelada { background-color: #e2e3e5; color: #41464b; }

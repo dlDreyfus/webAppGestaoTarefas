@@ -4,14 +4,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestão de Tarefas</title>
+    <title>Gestão de Tarefas | Home</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <main class="container">
-        <h1>Bem-vindo ao Gestor de Tarefas</h1>
-        <p>Este é o template principal do seu projeto. A estilização está sendo carregada a partir de <strong>static/css/style.css</strong>.</p>
-        <a href="#" class="btn btn-primary">Ver Tarefas</a>
+    <!-- Cabeçalho com Navegação -->
+    <header>
+        <div class="container navbar">
+            <a href="#" class="logo">Gestão de Tarefas e Equipes.</a>
+            <!-- Aqui você poderá adicionar um menu no futuro -->
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="container" style="padding: 2rem 0;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h2>Lista de Tarefas</h2>
+            <span class="badge">{{ tarefas.count }} Registros</span>
+        </div>
+        
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Responsável</th>
+                        <th>Prazo</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% regroup tarefas by tarefa as projeto_list %}
+                    
+                    {% for projeto in projeto_list %}
+                    <!-- Cabeçalho do Grupo (Nome da Tarefa/Projeto) -->
+                    <tr class="group-header">
+                        <td colspan="4">{{ projeto.grouper }} <small style="font-weight: normal; margin-left: 10px;">({{ projeto.list|length }} itens)</small></td>
+                    </tr>
+
+                    <!-- Itens da Tarefa -->
+                    {% for item in projeto.list %}
+                    <tr>
+                        <td>{{ item.itemTarefa }}</td>
+                        <td>{{ item.responsavelTarefa }}</td>
+                        <td>{{ item.prazoRealizacaoTarefa|date:"d/m/Y" }}</td>
+                        <td>
+                            <span class="status-badge status-{{ item.statusTarefa|slugify }}">
+                                {{ item.statusTarefa }}
+                            </span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" style="text-align: center;">Nenhuma tarefa encontrada.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <p>&copy; {% now "Y" %} IG.: @dlDreyfus</p>
+        </div>
+    </footer>
 </body>
 </html>
