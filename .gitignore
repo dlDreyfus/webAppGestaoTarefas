@@ -1,0 +1,38 @@
+# .gitignore
+
+# Ambientes Virtuais
+# -------------------
+# Ignore a pasta do ambiente virtual, que contém as dependências instaladas.
+# Ela pode ser recriada a partir do arquivo requirements.txt.
+venv/
+.venv/
+env/
+.env/
+
+# Arquivos de cache e compilados do Python
+# -----------------------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Arquivos de configuração de IDEs e editores
+# --------------------------------------------
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Arquivos de dependências do sistema operacional
+# -----------------------------------------------
+.DS_Store
+Thumbs.db
+
+# Arquivos de ambiente
+# --------------------
+# Arquivos que guardam senhas, chaves de API e outras informações sensíveis.
+.env
+*.env
+
+# Bancos de dados de desenvolvimento
+# ---------------------------------
+db.sqlite3
