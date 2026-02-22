@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from django.contrib.auth.models import User
 
 def gerar_id_tarefa():
     """
@@ -26,7 +27,12 @@ class Tarefa(models.Model):
     
     tarefa = models.CharField(max_length=255, verbose_name="Nome da Tarefa")
     itemTarefa = models.CharField(max_length=255, verbose_name="Item da Tarefa")
-    responsavelTarefa = models.CharField(max_length=255, verbose_name="Responsável")
+    responsavel = models.ForeignKey(
+        User, 
+        on_delete=models.CASCADE, 
+        verbose_name="Responsável",
+        null=True, blank=True
+    )
     dataDistribuicaoTarefa = models.DateField(verbose_name="Data de Distribuição")
     prazoRealizacaoTarefa = models.DateField(verbose_name="Prazo de Realização")
     observacoes = models.TextField(blank=True, null=True, verbose_name="Observações")

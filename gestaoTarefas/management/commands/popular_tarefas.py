@@ -3,6 +3,7 @@ import time
 from datetime import date, timedelta
 from django.core.management.base import BaseCommand
 from gestaoTarefas.models import Tarefa
+from django.contrib.auth.models import User
 
 class Command(BaseCommand):
     help = 'Cria 100 registros fictícios na base de dados dbGestaoTarefas'
@@ -24,10 +25,23 @@ class Command(BaseCommand):
             'Deploy em Produção', 'Análise de Riscos', 'Design de Interface'
         ]
         
-        responsaveis = [
-            'Ana Silva', 'Bruno Souza', 'Carlos Pereira', 'Daniela Oliveira', 
-            'Eduardo Santos', 'Fernanda Lima', 'Gabriel Costa'
+        nomes_responsaveis = [
+            ('ana', 'Ana Silva'), ('bruno', 'Bruno Souza'), 
+            ('carlos', 'Carlos Pereira'), ('daniela', 'Daniela Oliveira'), 
+            ('eduardo', 'Eduardo Santos'), ('fernanda', 'Fernanda Lima'), 
+            ('gabriel', 'Gabriel Costa')
         ]
+        
+        # Cria ou recupera os objetos User reais
+        usuarios_objs = []
+        for username, full_name in nomes_responsaveis:
+            user, created = User.objects.get_or_create(username=username)
+            if created:
+                user.first_name = full_name.split()[0]
+                user.last_name = " ".join(full_name.split()[1:])
+                user.email = f"{username}@exemplo.com"
+                user.save()
+            usuarios_objs.append(user)
         
         status_opcoes = ['No prazo', 'Atrasada', 'Concluída', 'Cancelada']
 
@@ -46,7 +60,7 @@ class Command(BaseCommand):
             tarefa = Tarefa(
                 tarefa=projeto_selecionado,
                 itemTarefa=random.choice(itens_acao),
-                responsavelTarefa=random.choice(responsaveis),
+                responsavel=random.choice(usuarios_objs),
                 dataDistribuicaoTarefa=data_distribuicao,
                 prazoRealizacaoTarefa=prazo,
                 observacoes=f"Observação automática gerada para o projeto {projeto_selecionado}.",

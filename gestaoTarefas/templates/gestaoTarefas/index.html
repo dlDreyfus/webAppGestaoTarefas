@@ -46,7 +46,7 @@
                     {% for item in projeto.list %}
                     <tr>
                         <td>{{ item.itemTarefa }}</td>
-                        <td>{{ item.responsavelTarefa }}</td>
+                        <td>{{ item.responsavel.get_full_name|default:item.responsavel.username }}</td>
                         <td>{{ item.prazoRealizacaoTarefa|date:"d/m/Y" }}</td>
                         <td>
                             <span class="status-badge status-{{ item.statusTarefa|slugify }}">
