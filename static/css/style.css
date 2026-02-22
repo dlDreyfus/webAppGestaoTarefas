@@ -186,6 +186,7 @@ th {
     color: var(--text-color);
     font-weight: 700;
     font-size: 1rem;
+    cursor: pointer; /* Indica que é clicável */
     user-select: none; /* Evita seleção de texto ao clicar rápido */
 }
 
@@ -193,37 +194,11 @@ th {
     background-color: #dde2e6; /* Leve destaque ao passar o mouse */
 }
 
-/* Botão de toggle */
-.group-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.5rem;
-    height: 1.5rem;
-    margin-right: 8px;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    cursor: pointer;
-    color: inherit;
-    vertical-align: middle;
-}
-
-.group-toggle:focus-visible {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
-    border-radius: 2px;
-}
-
 /* Ícone de seta */
 .toggle-icon {
     display: inline-block;
+    margin-right: 8px;
     transition: transform 0.3s ease;
-    transform: rotate(-90deg);
-}
-
-.group-toggle[aria-expanded="true"] .toggle-icon {
-    transform: rotate(0deg);
 }
 
 /* Classe para ocultar as linhas da tabela */
