@@ -39,12 +39,23 @@
                     {% for projeto in projeto_list %}
                     <!-- Cabeçalho do Grupo (Nome da Tarefa/Projeto) -->
                     <tr class="group-header">
-                        <td colspan="4">{{ projeto.grouper }} <small style="font-weight: normal; margin-left: 10px;">({{ projeto.list|length }} itens)</small></td>
+                        <td colspan="4">
+                            <button
+                                type="button"
+                                class="group-toggle"
+                                data-group-target="group-{{ forloop.counter }}"
+                                aria-expanded="false"
+                                aria-label="Expandir grupo"
+                            >
+                                <span class="toggle-icon" aria-hidden="true">▼</span>
+                            </button>
+                            {{ projeto.grouper }} <small style="font-weight: normal; margin-left: 10px;">({{ projeto.list|length }} itens)</small>
+                        </td>
                     </tr>
 
                     <!-- Itens da Tarefa -->
                     {% for item in projeto.list %}
-                    <tr>
+                    <tr class="hidden-row" data-group-id="group-{{ forloop.parentloop.counter }}">
                         <td>{{ item.itemTarefa }}</td>
                         <td>{{ item.responsavel.get_full_name|default:item.responsavel.username }}</td>
                         <td>{{ item.prazoRealizacaoTarefa|date:"d/m/Y" }}</td>
@@ -72,5 +83,7 @@
             <p>&copy; {% now "Y" %} IG.: @dlDreyfus</p>
         </div>
     </footer>
+
+    <script src="{% static 'js/script.js' %}" defer></script>
 </body>
 </html>
