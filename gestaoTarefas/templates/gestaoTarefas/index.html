@@ -27,10 +27,10 @@
             <table>
                 <thead>
                     <tr>
+                        <th>Status</th>
                         <th>Item</th>
                         <th>Responsável</th>
                         <th>Prazo</th>
-                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,14 +56,14 @@
                     <!-- Itens da Tarefa -->
                     {% for item in projeto.list %}
                     <tr class="hidden-row" data-group-id="group-{{ forloop.parentloop.counter }}">
-                        <td>{{ item.itemTarefa }}</td>
-                        <td>{{ item.responsavel.get_full_name|default:item.responsavel.username }}</td>
-                        <td>{{ item.prazoRealizacaoTarefa|date:"d/m/Y" }}</td>
                         <td>
                             <span class="status-badge status-{{ item.statusTarefa|slugify }}">
                                 {{ item.statusTarefa }}
                             </span>
                         </td>
+                        <td>{{ item.itemTarefa }}</td>
+                        <td>{{ item.responsavel.get_full_name|default:item.responsavel.username }}</td>
+                        <td>{{ item.prazoRealizacaoTarefa|date:"d/m/Y" }}</td>
                     </tr>
                     {% endfor %}
 
